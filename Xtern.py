@@ -8,6 +8,8 @@ from predicthq import Client
 import requests
 import json
 import reverse_geocoder as rg
+import shutil
+from os.path import exists
 
 API_kEY = "AIzaSyCNZHlKIkhqcNsjyTGakgrB9V_W_TRwy10"
 Token = '1dUmazWnjbONl6CMQ7o5pGkEHMqVb2T_KKFKAYyj'
@@ -37,13 +39,18 @@ def get_info(Location,miles,type):
     new = restaurant_df.filter(['business_status','name','price_level','rating','user_ratings_total'], axis = 1)
     new.sort_values("name", inplace = True)
     new.drop_duplicates(subset ="name",keep = 'first', inplace = True)
-    new.to_excel(Location + "_"+type+".xlsx")
+    file_name = Location + "_" + type+".xlsx"
+    destination = "Location Details"
+    Path = "Location Details/" + file_name
+    if exists(Path) == False:
+        new.to_excel(file_name)
+        shutil.move(file_name, destination)
     return new
 
 def analyze(df):
     Addresses = df['Address']
     info = {}
-    things = ["sport","concert","arts","festivals","expos","conference"]
+    things = ["sport","concert","arts","festivals","expos","conference","restaurants"]
     for i in range(len(Addresses)):
         if i >= 1:
             data = {}
