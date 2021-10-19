@@ -1,16 +1,6 @@
 import unittest
 from Xtern import get_info, interactive_visualizations, top_ten, Event, add_info
-import googlemaps
 import pandas as pd
-import time
-import plotly.express as px
-from eventbrite import Eventbrite
-from predicthq import Client
-import requests
-import json
-import reverse_geocoder as rg
-import shutil
-from os.path import exists
 
 class TestFileName(unittest.TestCase):
     def test_functions(self):
