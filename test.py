@@ -1,6 +1,7 @@
 import unittest
 from Xtern import get_info, interactive_visualizations, top_ten, Event, add_info
 import pandas as pd
+import xlrd
 
 class TestFileName(unittest.TestCase):
     def test_functions(self):
