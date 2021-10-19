@@ -22,6 +22,7 @@ jobs:
           pip3 install predicthq
           pip3 install reverse_geocoder
           pip3 install googlemaps
+          pip3 install xlrd
 
 
       - name: Test with unittest
