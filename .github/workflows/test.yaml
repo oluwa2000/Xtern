@@ -21,6 +21,7 @@ jobs:
           pip3 install eventbrite
           pip3 install predicthq
           pip3 install reverse_geocoder
+          pip3 install googlemaps
 
 
       - name: Test with unittest
