@@ -37,6 +37,7 @@ def get_info(Location,miles,type):
         next_page_token = response.get('next_page_token')
     restaurant_df = pd.DataFrame(restaurant_list)
     new = restaurant_df.filter(['business_status','name','price_level','rating','user_ratings_total'], axis = 1)
+    new = new[new['business_status'] == 'OPERATIONAL']
     new.sort_values("name", inplace = True)
     new.drop_duplicates(subset ="name",keep = 'first', inplace = True)
     file_name = Location + "_" + type+".xlsx"
@@ -82,7 +83,6 @@ def interactive_visualizations(data_frame):
     return names[highest]
 
 def top_ten(data_frame,total_ratings):
-    data_frame = data_frame[data_frame['business_status'] == 'OPERATIONAL']
     df_filtered = data_frame[data_frame['user_ratings_total'] >= total_ratings]
     df = df_filtered.sort_values(by=['rating'], ascending=False)
     df = df.head(10)
