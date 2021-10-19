@@ -6,7 +6,7 @@ import xlrd
 class TestFileName(unittest.TestCase):
     def test_functions(self):
         df = pd.DataFrame(pd.read_excel("Data.xlsx"))
-        new_df = pd.DataFrame(pd.read_excel("Output.xlsx"))
+        new_df = pd.DataFrame(pd.read_excel("output.xlsx"))
         a = get_info(df["Address"][1],15,"restaurant")
         b = interactive_visualizations(new_df)
         c = top_ten(a,200)
