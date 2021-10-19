@@ -23,6 +23,7 @@ jobs:
           pip3 install reverse_geocoder
           pip3 install googlemaps
           pip3 install xlrd==1.2.0
+          pip3 install openpyxl
 
 
       - name: Test with unittest
