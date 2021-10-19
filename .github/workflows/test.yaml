@@ -22,7 +22,7 @@ jobs:
           pip3 install predicthq
           pip3 install reverse_geocoder
           pip3 install googlemaps
-          pip3 install xlrd
+          pip3 install xlrd==1.2.0
 
 
       - name: Test with unittest
