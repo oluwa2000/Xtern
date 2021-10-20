@@ -99,27 +99,27 @@ def Event(Address):
     concert = ""
     arts = ""
     conference = ""
+    observances = ""
     expos = ""
-    festivals = ""
-    for event in phq.events.search( start_around={'origin': '2021-10-23'},end_around={'origin':'2021-10-30'}, within='10km@'+location, category='sports', limit = 1):
+    for event in phq.events.search(start = {'gte': '2021-05-15','lte': '2021-05-19'}, within='24km@'+location, limit = 1, category = "festivals"):
         text = event.title + " "+str(event.start) + reverseGeocode(event.location) + "Category: " + event.category
         sport += text
-    for event in phq.events.search( start_around={'origin': '2021-11-06'},end_around={'origin':'2021-11-13'}, within='10km@'+location, category='concerts', limit = 1):
+    for event in phq.events.search(start = {'gte':'2021-05-29','lte':'2021-06-02'}, within='24km@'+location, limit = 1, category = "concerts"):
         text = event.title + " "+str(event.start) + reverseGeocode(event.location) + "Category: " + event.category
         concert += text
-    for event in phq.events.search( start_around={'origin': '2021-11-20'},end_around={'origin':'2021-11-27'}, within='10km@'+location, category='performing-arts', limit = 1):
+    for event in phq.events.search( start={'gte': '2021-06-12','lte':'2021-06-14'}, within='24km@'+location, limit = 1, category = "performing-arts"):
         text = event.title + " "+str(event.start) + reverseGeocode(event.location) + "Category: " + event.category
         arts += text
-    for event in phq.events.search( start_around={'origin': '2021-10-04'},end_around={'origin':'2021-12-31'}, within='10km@'+location, category='conferences', limit = 1):
+    for event in phq.events.search( start={'gte': '2021-05-15', 'lte':'2021-07-29'}, within='24km@'+location, limit = 1, category = "conferences"):
         text = event.title + " "+str(event.start) + reverseGeocode(event.location) + "Category: " + event.category
         conference += text
-    for event in phq.events.search( start_around={'origin': '2021-12-18'},end_around={'origin':'2021-12-25'}, within='10km@'+location, category='expos', limit = 1):
+    for event in phq.events.search( start={'gte': '2021-06-26','lte':'2021-06-29'}, within='24km@'+location, limit = 1, category = "observances"):
         text = event.title + " "+str(event.start) + reverseGeocode(event.location) + "Category: " + event.category
-        expos += text
-    for event in phq.events.search( start_around={'origin': '2021-12-04'},end_around={'origin':'2021-11-11'}, within='10km@'+location, category='festivals', limit = 1):
+        observances += text
+    for event in phq.events.search( start={'gte': '2021-07-10','lte':'2021-07-15'}, within='24km@'+location, limit = 1, category = "sports"):
         text = event.title + " "+ str(event.start) + reverseGeocode(event.location) + "Category: " + event.category
-        festivals += text
-    events = [sport,concert,arts,festivals,expos,conference]
+        expos += text
+    events = [sport,concert,arts,observances,expos,conference]
     return events
 
 def add_info(Address):
@@ -127,7 +127,7 @@ def add_info(Address):
     x = get_info(Address, 15, "restaurants")
     x = top_ten(x,200)
     food_names = x['name']
-    data= {"10 events":food_names, "5 Events":pd.Series(event[:-1]), "Conference":pd.Series([event[-1]])}
+    data= {"Conference":pd.Series([event[-1]]),"5 Events":pd.Series(event[:-1]),"10 restaurants":pd.Series(food_names)}
     df = pd.DataFrame(data)
     df.to_excel("Schedule.xlsx")
     return df
